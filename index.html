@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -290,6 +290,339 @@
         }
 
         // التوقيت مضبوط على الساعة 6 مساءً
+        const target = new Date("April 10, 2026 18:00:00").getTime();
+        
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = target - now;
+            if (diff > 0) {
+                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }
+        }, 1000);
+    </script>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S & M | Wedding 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Great+Vibes&family=Amiri:ital@1&family=Cinzel:wght@400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #750306; 
+            --champagne-gold: linear-gradient(135deg, #d4af37 0%, #f7e7c1 50%, #d4af37 100%);
+            --envelope-bg: #750306; 
+            --envelope-flap: #4a0305;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .scene {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            max-width: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 2000px;
+        }
+
+        /* --- الظرف المعدل --- */
+        .envelope {
+            position: absolute;
+            bottom: 25%;
+            width: 90%;
+            height: 230px;
+            background: var(--envelope-bg);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 5;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 0 0 15px 15px;
+        }
+
+        /* غطاء الظرف */
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            background: var(--envelope-flap);
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            z-index: 6;
+            transform-origin: top;
+            transition: all 0.7s ease-in-out;
+        }
+
+        .seal {
+            position: absolute;
+            top: 105px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65px;
+            height: 65px;
+            background: var(--champagne-gold);
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cinzel', serif;
+            color: #7a632a;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 2px solid #d4af37;
+        }
+
+        /* --- الكارت --- */
+        .card {
+            position: absolute;
+            bottom: 25%;
+            width: 85%;
+            height: 220px;
+            background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('img2.jpg') no-repeat center/cover;
+            z-index: 4;
+            padding: 40px 20px;
+            text-align: center;
+            box-sizing: border-box;
+            transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            border: 1px solid #e8e2d4;
+            opacity: 0;
+            border-radius: 10px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            color: var(--primary-color);
+        }
+
+        .inner-frame {
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(117, 3, 6, 0.15);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .verse {
+            font-family: 'Amiri', serif;
+            font-size: 15px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-weight: bold;
+        }
+
+        .photo-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px auto;
+            padding: 4px;
+            border-radius: 50%;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .photo-container img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .std {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            display: block;
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 38px;
+            margin: 5px 0;
+            font-weight: 400;
+        }
+
+        .date-box {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            letter-spacing: 1px;
+            margin: 15px 0 5px 0;
+            padding: 8px 0;
+            border-top: 1px solid rgba(117, 3, 6, 0.1);
+        }
+
+        .time-box {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+            border-bottom: 1px solid rgba(117, 3, 6, 0.1);
+            padding-bottom: 8px;
+        }
+
+        .hall {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .city {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 3px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .unit span { font-weight: bold; font-size: 20px; display: block;}
+        .unit label { font-size: 8px; text-transform: uppercase; }
+
+        .scene.open .envelope::before { 
+            transform: rotateX(180deg); 
+            z-index: 1; 
+        }
+        .scene.open .seal { 
+            opacity: 0; 
+            visibility: hidden;
+            transition: 0.3s; 
+        }
+        .scene.open .card {
+            height: 85vh; 
+            bottom: 7vh;
+            opacity: 1;
+            z-index: 10;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .scene.open .envelope { 
+            transform: translateY(100vh); 
+            opacity: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 25px 0;
+            padding: 12px 35px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            letter-spacing: 2px;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="weddingMusic" loop>
+        <source src="11.mpeg" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="scene" id="mainScene">
+        <div class="envelope" onclick="toggleInvite()">
+            <div class="seal">S & M</div>
+        </div>
+
+        <div class="card">
+            <div class="inner-frame"></div>
+            
+            <div class="verse">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</div>
+            
+            <div class="photo-container">
+                <img src="img.jpeg" alt="Shams & Mahmoud">
+            </div>
+
+            <span class="std">SAVE THE DATE</span>
+            
+            <h1>Shams & Mahmoud</h1>
+            
+            <div class="date-box">APRIL 10, 2026</div>
+            <div class="time-box">AT 6:00 PM</div>
+
+            <div class="venue">
+                <span class="hall">RYONA HALL</span>
+                <span class="city">Dekernes, Dakahlia</span>
+            </div>
+
+            <p style="font-size: 12px; font-style: italic; margin-top: 15px; opacity: 0.9;">
+                We request the honor of your presence to celebrate our marriage.
+            </p>
+            
+            <div class="timer">
+                <div class="unit"><span id="d">00</span><label>Days</label></div>
+                <div class="unit"><span id="h">00</span><label>Hours</label></div>
+                <div class="unit"><span id="m">00</span><label>Mins</label></div>
+                <div class="unit"><span id="s">00</span><label>Secs</label></div>
+            </div>
+
+            <a href="https://maps.app.goo.gl/8UHYUGuy4NCYvhmk6?g_st=aw" target="_blank" class="btn">VIEW LOCATION</a>
+            
+            <div style="height: 30px;"></div>
+        </div>
+    </div>
+
+    <script>
+// استبدل الجزء الخاص بـ function toggleInvite في الكود عندك بهذا الجزء:
+
+function toggleInvite() {
+    const scene = document.getElementById('mainScene');
+    const music = document.getElementById('weddingMusic');
+
+    // 1. فتح الظرف
+    scene.classList.add('open');
+
+    // 2. تحديد وقت البداية (الثانية 5)
+    music.currentTime = 5; 
+
+    // 3. تشغيل الأغنية
+    music.play().catch(error => {
+        console.log("التحميل مطلوب أو سياسة المتصفح تمنع التشغيل التلقائي");
+    });
+
+    // 4. مراقبة الوقت عشان نفصل عند الثانية 15
+    music.addEventListener('timeupdate', function() {
+        if (this.currentTime >= 16) {
+            this.pause();
+            // لو عاوزها تقف تماماً وما ترجعش تشتغل تاني شيل الـ event listener
+            this.removeEventListener('timeupdate', arguments.callee);
+        }
+    });
+}
         const target = new Date("April 10, 2026 18:00:00").getTime();
         
         setInterval(() => {
